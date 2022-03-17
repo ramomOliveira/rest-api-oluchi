@@ -3,6 +3,7 @@ package com.oluchi.restapi;
 import java.util.List;
 import java.util.Optional;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.oluchi.restapi.database.RepositoryArtistPage;
 import com.oluchi.restapi.entity.ArtistPage;
 
@@ -31,7 +32,7 @@ public class ArtistPageREST {
         return repository.findAll();
     }
 
-    @GetMapping(value = "artist/{id}")
+    @GetMapping("{id}")
     public Optional<ArtistPage> findById(@PathVariable String id) {
         return repository.findById(id);
     }
@@ -41,14 +42,14 @@ public class ArtistPageREST {
         repository.save(artist);
     }
 
-    @PutMapping
-    public void changeArtist(@RequestBody ArtistPage artist) {
-
+    @PutMapping("{id}")
+    public void changeArtist(@RequestBody ArtistPage artist, @PathVariable String id) {
+        artist.setId(id);
         repository.save(artist);
     }
 
-    @DeleteMapping
-    public void deleteArtist(@RequestBody ArtistPage artist) {
-        repository.delete(artist);
+    @DeleteMapping("{id}")
+    public void deleteArtist(@PathVariable String id) {
+        repository.deleteById(id);
     }
 }

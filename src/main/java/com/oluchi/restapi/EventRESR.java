@@ -30,8 +30,9 @@ public class EventRESR {
         return repository.findAll();
     }
 
-    @GetMapping(value = "event/{id}")
+    @GetMapping("{id}")
     public Optional<Event> findById(@PathVariable String id) {
+
         return repository.findById(id);
     }
 
@@ -40,14 +41,14 @@ public class EventRESR {
         repository.save(event);
     }
 
-    @PutMapping
-    public void changeEvent(@RequestBody Event event) {
-
+    @PutMapping("{id}")
+    public void changeEvent(@RequestBody Event event, @PathVariable String id) {
+        event.setId(id);
         repository.save(event);
     }
 
-    @DeleteMapping
-    public void deleteEvent(@RequestBody Event event) {
-        repository.delete(event);
+    @DeleteMapping("{id}")
+    public void deleteEvent(@PathVariable String id) {
+        repository.deleteById(id);
     }
 }
