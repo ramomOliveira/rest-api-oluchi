@@ -33,7 +33,7 @@ public class EventRESR {
         return repository.findAll();
     }
 
-    @GetMapping
+    @GetMapping("/user")
     public List<Event> listByUserId(@RequestHeader String userId) {
         return repository.findAllByUserId(userId);
     }
