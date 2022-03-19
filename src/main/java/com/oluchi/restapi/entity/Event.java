@@ -9,6 +9,8 @@ public class Event {
     @Id
     private String id;
 
+    private String userId;
+
     private String name;
 
     private String description;
@@ -41,6 +43,14 @@ public class Event {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getStateUf() {

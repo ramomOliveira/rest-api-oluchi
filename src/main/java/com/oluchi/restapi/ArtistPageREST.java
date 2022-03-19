@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,19 +38,15 @@ public class ArtistPageREST {
         return repository.findById(id);
     }
 
+    @GetMapping("/profile")
+    public Optional<ArtistPage> findByUser(@RequestHeader String userId) {
+        return repository.findById(userId);
+    }
+
     @PostMapping
-    public void saveArtist(@RequestBody ArtistPage artist) {
+    public void saveArtist(@RequestBody ArtistPage artist, @RequestHeader String userId) {
+        artist.setId(userId);
         repository.save(artist);
     }
 
-    @PutMapping("{id}")
-    public void changeArtist(@RequestBody ArtistPage artist, @PathVariable String id) {
-        artist.setId(id);
-        repository.save(artist);
-    }
-
-    @DeleteMapping("{id}")
-    public void deleteArtist(@PathVariable String id) {
-        repository.deleteById(id);
-    }
 }
