@@ -57,6 +57,7 @@ public class EventRESR {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
         event.setId(id);
+        event.setUserId(userId);
         repository.save(event);
         return null;
     }
