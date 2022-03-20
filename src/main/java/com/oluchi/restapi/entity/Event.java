@@ -13,6 +13,16 @@ public class Event {
 
     private String name;
 
+    private String nameArtist;
+
+    public String getNameArtist() {
+        return nameArtist;
+    }
+
+    public void setNameArtist(String nameArtist) {
+        this.nameArtist = nameArtist;
+    }
+
     private String description;
 
     private String city;
