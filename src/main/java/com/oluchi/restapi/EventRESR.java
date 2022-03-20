@@ -53,7 +53,7 @@ public class EventRESR {
     @PutMapping("{id}")
     public ResponseEntity changeEvent(@RequestBody Event event, @PathVariable String id, @RequestHeader String userId) {
         Optional<Event> e = repository.findById(id);
-        if (!e.isPresent() || e.get().getUserId() != userId) {
+        if (!e.isPresent() || !e.get().getUserId().equals(userId)) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
         event.setId(id);
@@ -64,7 +64,7 @@ public class EventRESR {
     @DeleteMapping("{id}")
     public ResponseEntity deleteEvent(@PathVariable String id, @RequestHeader String userId) {
         Optional<Event> e = repository.findById(id);
-        if (!e.isPresent() || e.get().getUserId() != userId) {
+        if (!e.isPresent() || !e.get().getUserId().equals(userId)) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
         repository.deleteById(id);
